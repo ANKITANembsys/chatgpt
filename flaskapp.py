@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
 import os
 import openai
 
-openai.api_key = "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"
+
 
 # creating a Flask app
 app = Flask(__name__)
@@ -24,11 +24,13 @@ def home():
 # the number to be squared is sent in the URL when we use GET
 # on the terminal type: curl http://127.0.0.1:5000 / home / 10
 # this returns 100 (square of 10)
-@app.route('/home/<str:text>', methods = ['GET'])
+@app.route('/<string:text>/', methods = ['GET','POST'])
 def disp(text):
+  openai.api_key = "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"
+
   response = openai.Completion.create(
   model="text-davinci-003",
-  prompt=text,
+  prompt="write an esaay about "+str(text),
   temperature=0.3,
   max_tokens=100,
   top_p=1.0,
@@ -40,5 +42,5 @@ def disp(text):
 # driver function
 if __name__ == '__main__':
 
-	app.run(debug = True)
+	app.run()
 
