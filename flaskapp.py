@@ -26,7 +26,7 @@ def home():
 # this returns 100 (square of 10)
 @app.route('/<string:text>/', methods = ['GET','POST'])
 def disp(text):
-  openai.api_key = "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"
+  openai.api_key = process.env.api
 
   response = openai.Completion.create(
   model="text-davinci-003",
