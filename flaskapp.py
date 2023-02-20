@@ -30,7 +30,7 @@ def disp(text):
 
   response = openai.Completion.create(
   model="text-davinci-003",
-  prompt="write an esaay about "+str(text),
+  prompt="write an esaay about "+str(process.env.text),
   temperature=0.3,
   max_tokens=100,
   top_p=1.0,
