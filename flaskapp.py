@@ -24,7 +24,7 @@ def home():
 # the number to be squared is sent in the URL when we use GET
 # on the terminal type: curl http://127.0.0.1:5000 / home / 10
 # this returns 100 (square of 10)
-@app.route('essay/<string:text>/', methods = ['GET','POST'])
+@app.route('/essay/<string:text>/', methods = ['GET','POST'])
 def disp(text):
   openai.api_key = os.environ['api']
 
@@ -38,12 +38,12 @@ def disp(text):
   presence_penalty=0.0)
   return response
 
-@app.route('txt2img/<string:text>/', methods = ['GET','POST'])
+@app.route('/txt2img/<string:text>/', methods = ['GET','POST'])
 def img(text):
   openai.api_key = os.environ['api']
 
   response = openai.Image.create(
-  prompt="a white siamese cat",
+  prompt=text,
   n=1,
   size="1024x1024")
   image_url = response['data'][0]['url']
