@@ -3,6 +3,10 @@
 from flask import Flask, jsonify, request
 import os
 import openai
+from pytube import YouTube
+import os
+import random
+from flask import send_file
 
 
 
@@ -49,6 +53,32 @@ def img(text):
   image_url = response['data'][0]['url']
   return image_url
 
+@app.route('/ytd/', methods = ['GET','POST'])
+def ytd():
+  url = request.args.get('url')
+  print("https://www.youtube.com/"+str(url))
+  yt = YouTube("https://www.youtube.com/"+str(url))
+    
+  # extract only audio
+  video = yt.streams.filter(only_audio=True).first()
+    
+  # check for destination to save file
+  print("Enter the destination (leave blank for current directory)")
+  destination = '.'
+  print(destination) 
+  # download the file
+  out_file = video.download(output_path=destination)
+
+  num = random.random()
+  # save the file
+  base, ext = os.path.splitext(out_file)
+  new_file = base +  str(num)+'.mp3'
+  os.rename(out_file, new_file)
+  print(new_file)
+    
+  # result of success
+  print(yt.title + " has been successfully downloaded.")
+  return send_file(new_file, as_attachment=True) 
 # driver function
 if __name__ == '__main__':
 
