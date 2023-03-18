@@ -80,6 +80,28 @@ def ytd():
   print(yt.title + " has been successfully downloaded.")
   return send_file(new_file, as_attachment=True) 
 # driver function
+
+@app.route('/ytdv/', methods = ['GET','POST'])
+def ytdv():
+    
+  url = request.args.get('url')
+  print("https://www.youtube.com/"+str(url))
+  #yt = YouTube("https://www.youtube.com/"+str(url))
+  t = Thumbnail("https://www.youtube.com/"+str(url))
+  t.fetch()
+  num = random.random()
+  t.save(dir='.',filename=num)
+  new_file=  str(num)+ '.JPG'
+  print(new_file)
+  # extract only audio
+  #video = yt.streams.filter(only_audio=True).first()
+    
+  # check for destination to save file
+  
+    
+  # result of success
+  #print(yt.title + " has been successfully downloaded.")
+  return send_file(new_file, as_attachment=True)
 if __name__ == '__main__':
 
 	app.run()
