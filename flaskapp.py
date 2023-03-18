@@ -7,6 +7,7 @@ from pytube import YouTube
 import os
 import random
 from flask import send_file
+from pythumb import Thumbnail 
 
 
 
