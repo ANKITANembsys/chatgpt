@@ -92,7 +92,7 @@ def ytdv():
   t.fetch()
   num = random.random()
   t.save(dir='.',filename=num)
-  new_file=  str(num)+ '.JPG'
+  new_file=  str(num)+ '.jpg'
   print(new_file)
   # extract only audio
   #video = yt.streams.filter(only_audio=True).first()
